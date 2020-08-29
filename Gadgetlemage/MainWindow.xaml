@@ -4,11 +4,11 @@
         xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
         xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
         xmlns:local="clr-namespace:Gadgetlemage"
-        mc:Ignorable="d" Width="546" VerticalAlignment="Top" ResizeMode="CanMinimize" Height="479">
+        mc:Ignorable="d" Width="546" VerticalAlignment="Top" ResizeMode="CanMinimize" Height="530.041">
     <Grid Margin="0,0,2,0" VerticalAlignment="Top">
         <ComboBox x:Name="comboWeapons" Margin="10,10,90,0" VerticalAlignment="Top" FontFamily="Roboto" Height="22"/>
         <Button x:Name="btnCreate" Content="Create" HorizontalAlignment="Right" Margin="0,10,10,0" VerticalAlignment="Top" Width="75" Height="22" FontFamily="Roboto" Click="BtnCreate_Click"/>
-        <GroupBox Header="Hotkey" Margin="10,328,10,-36" VerticalAlignment="Top" FontFamily="Roboto" Height="92">
+        <GroupBox Header="Hotkey" Margin="10,372,10,-80" VerticalAlignment="Top" FontFamily="Roboto" Height="92">
             <Grid Margin="0,0,0,1">
                 <Grid.ColumnDefinitions>
                     <ColumnDefinition/>
@@ -23,35 +23,43 @@
                 <Button x:Name="btnDeleteHotkey" Content="Change Hotkey" Margin="10,37,10,0" VerticalAlignment="Top" Height="22" Grid.Column="2"/>
             </Grid>
         </GroupBox>
-        <GroupBox Header="Settings" Margin="10,37,10,0" VerticalAlignment="Top" HorizontalContentAlignment="Stretch" FontFamily="Roboto" Height="286">
-            <Grid>
+        <GroupBox Header="Settings" Margin="10,37,10,0" VerticalAlignment="Top" HorizontalContentAlignment="Stretch" FontFamily="Roboto" Height="330">
+            <Grid Margin="0,0,0,-51">
+                <Grid.RowDefinitions>
+                    <RowDefinition Height="20*"/>
+                    <RowDefinition Height="311*"/>
+                    <RowDefinition Height="29*"/>
+                </Grid.RowDefinitions>
                 <Grid.ColumnDefinitions>
                     <ColumnDefinition Width="7*"/>
                     <ColumnDefinition/>
                 </Grid.ColumnDefinitions>
-                <TextBlock Margin="10,34,10,0" TextWrapping="Wrap" VerticalAlignment="Top" Height="31" FontFamily="Roboto" Foreground="#FF464646"><Run Text="Automatically creates the Black Knight weapon if it doesn't drop. "/><Run Text="The weapon can "/><Run Text="still "/><Run Text="be dropped manually if desired."/></TextBlock>
-                <TextBlock Margin="10,20,10,0" TextWrapping="Wrap" VerticalAlignment="Top" FontFamily="Roboto" FontWeight="Bold" Height="14"><Run Text="Automatically"/><Run Text=" Create Weapon"/></TextBlock>
-                <TextBlock Margin="10,119,10,0" TextWrapping="Wrap" VerticalAlignment="Top" FontFamily="Roboto" FontWeight="Bold" Height="14" Text="Enable Global Hotkey"/>
-                <TextBlock Margin="10,133,10,0" TextWrapping="Wrap" VerticalAlignment="Top" Height="31" FontFamily="Roboto" Foreground="#FF464646" Text="Enables the global hotkey. The hotkey is only active when Dark Souls or Dark Souls: Remastered is in focus."/>
-                <TextBlock Margin="10,169,10,0" TextWrapping="Wrap" VerticalAlignment="Top" FontFamily="Roboto" FontWeight="Bold" Height="14"><Run Text="Consume "/><Run Text="Keypress"/></TextBlock>
-                <TextBlock Margin="10,183,10,0" TextWrapping="Wrap" VerticalAlignment="Top" Height="31" FontFamily="Roboto" Foreground="#FF464646" Text="If enabled, the keypress for the global hotkey won't be forwarded to the game."/>
-                <TextBlock Margin="10,219,10,0" TextWrapping="Wrap" VerticalAlignment="Top" FontFamily="Roboto" FontWeight="Bold" Height="14"><Run Text="Enable "/><Run Text="Sou"/><Run Text="nd"/></TextBlock>
-                <TextBlock Margin="10,233,10,0" TextWrapping="Wrap" VerticalAlignment="Top" Height="31" FontFamily="Roboto" Foreground="#FF464646" Text="Emits a beep sound when a weapon is created, be it through an automatic drop, a hotkey or manually."/>
-                <CheckBox x:Name="cbxAutoCreate" Margin="10,34,37,0" VerticalAlignment="Top" Height="16" Grid.Column="1"/>
-                <CheckBox x:Name="cbxHotkey" Content="" Margin="10,133,37,0" VerticalAlignment="Top" Height="16" Grid.Column="1"/>
-                <CheckBox x:Name="cbxConsume" Content="" VerticalAlignment="Top" Height="16" Grid.Column="1" Margin="10,183,37,0"/>
-                <CheckBox x:Name="cbxSound" Content="" VerticalAlignment="Top" Height="16" Grid.Column="1" Margin="10,233,37,0"/>
-                <TextBlock Margin="10,83,10,0" TextWrapping="Wrap" VerticalAlignment="Top" Height="31" FontFamily="Roboto" Foreground="#FF464646"><Run Text="Automatically delete the Black Knight Shield "/><Run Text="from the inventory if it drops."/></TextBlock>
-                <TextBlock Margin="10,69,10,0" TextWrapping="Wrap" VerticalAlignment="Top" FontFamily="Roboto" FontWeight="Bold" Height="14"><Run Text="Automatically"/><Run Text=" "/><Run Text="Delete "/><Run Text="Shield"/></TextBlock>
-                <CheckBox x:Name="cbxAutoDelete" Margin="10,83,37,0" VerticalAlignment="Top" Height="16" Grid.Column="1"/>
-
+                <TextBlock Margin="10,14,10,0" TextWrapping="Wrap" VerticalAlignment="Top" Height="31" FontFamily="Roboto" Foreground="#FF464646" Grid.Row="1"><Run Text="Automatically creates the Black Knight weapon if it doesn't drop. "/><Run Text="The weapon can "/><Run Text="still "/><Run Text="be dropped manually if desired."/></TextBlock>
+                <TextBlock Margin="10,0" TextWrapping="Wrap" VerticalAlignment="Top" FontFamily="Roboto" FontWeight="Bold" Height="14" Grid.Row="1"><Run Text="Automatically"/><Run Text=" Create Weapon"/></TextBlock>
+                <TextBlock Margin="10,99,10,0" TextWrapping="Wrap" VerticalAlignment="Top" FontFamily="Roboto" FontWeight="Bold" Height="14" Text="Enable Global Hotkey" Grid.Row="1"/>
+                <TextBlock Margin="10,113,10,0" TextWrapping="Wrap" VerticalAlignment="Top" Height="31" FontFamily="Roboto" Foreground="#FF464646" Text="Enables the global hotkey. The hotkey is only active when Dark Souls or Dark Souls: Remastered is in focus." Grid.Row="1"/>
+                <TextBlock Margin="10,149,10,0" TextWrapping="Wrap" VerticalAlignment="Top" FontFamily="Roboto" FontWeight="Bold" Height="14" Grid.Row="1"><Run Text="Consume "/><Run Text="Keypress"/></TextBlock>
+                <TextBlock Margin="10,163,10,0" TextWrapping="Wrap" VerticalAlignment="Top" Height="31" FontFamily="Roboto" Foreground="#FF464646" Text="If enabled, the keypress for the global hotkey won't be forwarded to the game." Grid.Row="1"/>
+                <TextBlock Margin="10,199,10,0" TextWrapping="Wrap" VerticalAlignment="Top" FontFamily="Roboto" FontWeight="Bold" Height="14" Grid.Row="1"><Run Text="Enable "/><Run Text="Sound"/></TextBlock>
+                <TextBlock Margin="10,218,10,65" TextWrapping="Wrap" FontFamily="Roboto" Foreground="#FF464646" Text="Emits a beep sound when a weapon is created, be it through an automatic drop, a hotkey or manually." Grid.Row="1"/>
+                <CheckBox x:Name="cbxAutoCreate" Margin="10,14,37,0" VerticalAlignment="Top" Height="16" Grid.Column="1" Grid.Row="1"/>
+                <CheckBox x:Name="cbxHotkey" Content="" Margin="10,113,37,0" VerticalAlignment="Top" Height="16" Grid.Column="1" Grid.Row="1"/>
+                <CheckBox x:Name="cbxConsume" Content="" VerticalAlignment="Top" Height="16" Grid.Column="1" Margin="10,163,37,0" Grid.Row="1"/>
+                <CheckBox x:Name="cbxSound" Content="" VerticalAlignment="Top" Height="16" Grid.Column="1" Margin="10,213,37,0" Grid.Row="1"/>
+                <TextBlock Margin="10,63,10,0" TextWrapping="Wrap" VerticalAlignment="Top" Height="31" FontFamily="Roboto" Foreground="#FF464646" Grid.Row="1"><Run Text="Automatically delete the Black Knight Shield "/><Run Text="from the inventory if it drops."/></TextBlock>
+                <TextBlock Margin="10,49,10,0" TextWrapping="Wrap" VerticalAlignment="Top" FontFamily="Roboto" FontWeight="Bold" Height="14" Grid.Row="1"><Run Text="Automatically"/><Run Text=" "/><Run Text="Delete "/><Run Text="Shield"/></TextBlock>
+                <CheckBox x:Name="cbxAutoDelete" Margin="10,63,37,0" VerticalAlignment="Top" Height="16" Grid.Column="1" Grid.Row="1"/>
+                <TextBlock x:Name="tbxSoundDisplayText" Margin="10,260,240,0" VerticalAlignment="Top" TextWrapping="Wrap" FontFamily="Roboto" Height="36" Grid.Row="1" Text="Using Default System Beep" />
+                <Button x:Name="btnUseSystemBeepSound" Content="Use System Beep" HorizontalAlignment="Right" Margin="0,260,136,0" VerticalAlignment="Top" Width="96" Height="22" FontFamily="Roboto" Grid.Row="1" Click="BtnUseSystemBeepSound_Click"/>
+                <Button x:Name="btnSelectCustomSound" Content="Select Custom" HorizontalAlignment="Right" Margin="0,260,40,0" VerticalAlignment="Top" Width="86" Height="22" FontFamily="Roboto" Grid.Row="1" Click="BtnSelectCustomSound_Click"/>
+                <Button x:Name="btnTestSound" Content=" ▶" HorizontalAlignment="Right" Margin="0,260,10,0" VerticalAlignment="Top" Width="22" Height="22" FontFamily="Roboto" Grid.Row="1" Click="BtnTestSound_Click" />
             </Grid>
         </GroupBox>
-        <TextBlock x:Name="AboutLink" Margin="0,425,10,-57" HorizontalAlignment="Right" VerticalAlignment="Top">           
+        <TextBlock x:Name="AboutLink" Margin="0,471,10,-103" HorizontalAlignment="Right" VerticalAlignment="Top" RenderTransformOrigin="-0.338,3.795">
             <Hyperlink NavigateUri="https://github.com/CapitaineToinon/Gadgetlemage" RequestNavigate="Hyperlink_RequestNavigate">
                 About
             </Hyperlink>
         </TextBlock>
-        <Button x:Name="btnDebug" Content="DEBUG" HorizontalAlignment="Left" Margin="10,425,0,-57" VerticalAlignment="Top" Width="75" Height="16"/>
+        <Button x:Name="btnDebug" Content="DEBUG" HorizontalAlignment="Left" Margin="10,469,0,-101" VerticalAlignment="Top" Width="75" Height="16"/>
     </Grid>
 </Window>

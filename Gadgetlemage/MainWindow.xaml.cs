@@ -1,12 +1,13 @@
-﻿using System;
+﻿using Gadgetlemage.DarkSouls;
+using LowLevelHooking;
+using Microsoft.Win32;
+using System;
 using System.Collections.Generic;
 using System.Diagnostics;
 using System.Threading;
 using System.Windows;
 using System.Windows.Controls;
 using System.Windows.Navigation;
-using Gadgetlemage.DarkSouls;
-using LowLevelHooking;
 
 namespace Gadgetlemage
 {
@@ -120,6 +121,7 @@ namespace Gadgetlemage
             bool consume = cbxConsume.IsChecked ?? false;
             bool sound = cbxSound.IsChecked ?? false;
 
+
             Properties.Settings.Default["SelectedIndex"] = selectedIndex;
             Properties.Settings.Default["AutoCreate"] = autoCreate;
             Properties.Settings.Default["AutoDelete"] = autoDelete;
@@ -182,6 +184,8 @@ namespace Gadgetlemage
             cbxHotkey.IsChecked = (bool)Properties.Settings.Default["Hotkey"];
             cbxConsume.IsChecked = (bool)Properties.Settings.Default["Consume"];
             cbxSound.IsChecked = (bool)Properties.Settings.Default["Sound"];
+
+            tbxSoundDisplayText.Text = generateSoundDisplayText(Properties.Settings.Default["CustomSoundPath"].ToString());
             comboWeapons.Items.Clear();
             Model.Weapons.ForEach(w => comboWeapons.Items.Add(w));
             comboWeapons.SelectedIndex = selectedIndex;
@@ -218,7 +222,9 @@ namespace Gadgetlemage
         /// </summary>
         /// <param name="sender"></param>
         /// <param name="e"></param>
+#pragma warning disable CS0246 // The type or namespace name 'PropertyHook' could not be found (are you missing a using directive or an assembly reference?)
         private void Hook_OnHookedUnHook(object sender, PropertyHook.PHEventArgs e)
+#pragma warning restore CS0246 // The type or namespace name 'PropertyHook' could not be found (are you missing a using directive or an assembly reference?)
         {
             Dispatcher.Invoke(new Action(() =>
             {
@@ -236,10 +242,11 @@ namespace Gadgetlemage
             Dispatcher.Invoke(new Action(() =>
             {
                 bool sound = cbxSound.IsChecked ?? false;
+                string soundPath = (string)Properties.Settings.Default["CustomSoundPath"];
 
                 if (sound)
                 {
-                    Console.Beep();
+                    playSound(soundPath);
                 }
             }));
         }
@@ -304,6 +311,63 @@ namespace Gadgetlemage
         private Version getRunningVersion()
         {
             return System.Reflection.Assembly.GetExecutingAssembly().GetName().Version;
+        }
+
+        private void BtnSelectCustomSound_Click(object sender, RoutedEventArgs e)
+        {
+            OpenFileDialog dialog = new OpenFileDialog();
+            dialog.Filter = "Audio Files (.wav)|*.wav";
+
+            if (dialog.ShowDialog() == true)
+            {
+                string path = dialog.FileName;
+                tbxSoundDisplayText.Text = generateSoundDisplayText(path);
+                Properties.Settings.Default["CustomSoundPath"] = path;
+
+            }
+        }
+
+        private void playSound(string path)
+        {
+            System.Media.SoundPlayer player = new System.Media.SoundPlayer();
+            player.SoundLocation = path;
+            player.Load();
+            player.Play();
+        }
+
+        private void BtnTestSound_Click(object sender, RoutedEventArgs e)
+        {
+            string path = (string)Properties.Settings.Default["CustomSoundPath"];
+            if(path.Length == 0)
+            {
+                Console.Beep();
+            } else
+            {
+                playSound((string)Properties.Settings.Default["CustomSoundPath"]);
+            }
+        }
+
+        private void BtnUseSystemBeepSound_Click(object sender, RoutedEventArgs e)
+        {
+            Properties.Settings.Default["CustomSoundPath"] = "";
+            tbxSoundDisplayText.Text = generateSoundDisplayText();
+        }
+
+        private string generateSoundDisplayText(string customSoundPath = "")
+        {
+
+            string soundDisplayText;
+            if (customSoundPath.Trim().Length == 0)
+            {
+                soundDisplayText = "Using Default System Beep";
+            }
+            else
+            {
+                int lastIndex = customSoundPath.LastIndexOf("\\");
+                soundDisplayText = "Using " + customSoundPath.Substring(lastIndex + 1);
+            }
+
+            return soundDisplayText;
         }
 
 #if DEBUG
