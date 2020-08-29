@@ -70,7 +70,7 @@ namespace Gadgetlemage.DarkSouls
 
                 // Write, Execute and Free
                 Kernel32.WriteBytes(Process.Handle, memory, asm);
-                int result = Process.Execute(memory);
+                int result = (int)Process.Execute(memory);
                 Process.Free(memory);
             }
         }
