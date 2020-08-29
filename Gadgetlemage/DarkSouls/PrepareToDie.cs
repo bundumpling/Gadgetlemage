@@ -1,7 +1,5 @@
 ﻿using System;
-#pragma warning disable CS0246 // The type or namespace name 'PropertyHook' could not be found (are you missing a using directive or an assembly reference?)
 using PropertyHook;
-#pragma warning restore CS0246 // The type or namespace name 'PropertyHook' could not be found (are you missing a using directive or an assembly reference?)
 
 namespace Gadgetlemage.DarkSouls
 {
@@ -20,21 +18,15 @@ namespace Gadgetlemage.DarkSouls
         /// <summary>
         /// Properties
         /// </summary>
-#pragma warning disable CS0246 // The type or namespace name 'PHPointer' could not be found (are you missing a using directive or an assembly reference?)
         public PHPointer pBasePtr { get; private set; }
-#pragma warning restore CS0246 // The type or namespace name 'PHPointer' could not be found (are you missing a using directive or an assembly reference?)
-#pragma warning disable CS0246 // The type or namespace name 'PHPointer' could not be found (are you missing a using directive or an assembly reference?)
         public PHPointer pInventoryData { get; private set; }
-#pragma warning restore CS0246 // The type or namespace name 'PHPointer' could not be found (are you missing a using directive or an assembly reference?)
 
         /// <summary>
         /// Constructor
         /// Needs to RescanAOB() for pointers to update
         /// </summary>
         /// <param name="process"></param>
-#pragma warning disable CS0246 // The type or namespace name 'PHook' could not be found (are you missing a using directive or an assembly reference?)
         public PrepareToDie(PHook process) : base(process)
-#pragma warning restore CS0246 // The type or namespace name 'PHook' could not be found (are you missing a using directive or an assembly reference?)
         {
             // Set pointers
             base.pFlags = Process.RegisterAbsoluteAOB(FLAGS_AOB, 8, 0, 0);
