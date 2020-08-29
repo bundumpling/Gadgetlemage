@@ -1,4 +1,5 @@
 ﻿using System;
+using Microsoft.Win32;
 using System.Collections.Generic;
 using System.Diagnostics;
 using System.Threading;
@@ -120,6 +121,7 @@ namespace Gadgetlemage
             bool consume = cbxConsume.IsChecked ?? false;
             bool sound = cbxSound.IsChecked ?? false;
 
+
             Properties.Settings.Default["SelectedIndex"] = selectedIndex;
             Properties.Settings.Default["AutoCreate"] = autoCreate;
             Properties.Settings.Default["AutoDelete"] = autoDelete;
@@ -182,6 +184,8 @@ namespace Gadgetlemage
             cbxHotkey.IsChecked = (bool)Properties.Settings.Default["Hotkey"];
             cbxConsume.IsChecked = (bool)Properties.Settings.Default["Consume"];
             cbxSound.IsChecked = (bool)Properties.Settings.Default["Sound"];
+
+            tbxSoundDisplayText.Text = generateSoundDisplayText(Properties.Settings.Default["CustomSoundPath"].ToString());
             comboWeapons.Items.Clear();
             Model.Weapons.ForEach(w => comboWeapons.Items.Add(w));
             comboWeapons.SelectedIndex = selectedIndex;
@@ -236,10 +240,11 @@ namespace Gadgetlemage
             Dispatcher.Invoke(new Action(() =>
             {
                 bool sound = cbxSound.IsChecked ?? false;
+                string soundPath = (string)Properties.Settings.Default["CustomSoundPath"];
 
                 if (sound)
                 {
-                    Console.Beep();
+                    playSound(soundPath);
                 }
             }));
         }
@@ -304,6 +309,64 @@ namespace Gadgetlemage
         private Version getRunningVersion()
         {
             return System.Reflection.Assembly.GetExecutingAssembly().GetName().Version;
+        }
+
+        private void BtnSelectCustomSound_Click(object sender, RoutedEventArgs e)
+        {
+            OpenFileDialog dialog = new OpenFileDialog();
+            dialog.Filter = "Audio Files (.wav)|*.wav";
+
+            if (dialog.ShowDialog() == true)
+            {
+                string path = dialog.FileName;
+                tbxSoundDisplayText.Text = generateSoundDisplayText(path);
+                Properties.Settings.Default["CustomSoundPath"] = path;
+
+            }
+        }
+
+        private void playSound(string path)
+        {
+            System.Media.SoundPlayer player = new System.Media.SoundPlayer();
+            player.SoundLocation = path;
+            player.Load();
+            player.Play();
+        }
+
+        private void BtnTestSound_Click(object sender, RoutedEventArgs e)
+        {
+            string path = (string)Properties.Settings.Default["CustomSoundPath"];
+            if (path.Length == 0)
+            {
+                Console.Beep();
+            }
+            else
+            {
+                playSound((string)Properties.Settings.Default["CustomSoundPath"]);
+            }
+        }
+
+        private void BtnUseSystemBeepSound_Click(object sender, RoutedEventArgs e)
+        {
+            Properties.Settings.Default["CustomSoundPath"] = "";
+            tbxSoundDisplayText.Text = generateSoundDisplayText();
+        }
+
+        private string generateSoundDisplayText(string customSoundPath = "")
+        {
+
+            string soundDisplayText;
+            if (customSoundPath.Trim().Length == 0)
+            {
+                soundDisplayText = "Using Default System Beep";
+            }
+            else
+            {
+                int lastIndex = customSoundPath.LastIndexOf("\\");
+                soundDisplayText = "Using " + customSoundPath.Substring(lastIndex + 1);
+            }
+
+            return soundDisplayText;
         }
 
 #if DEBUG
