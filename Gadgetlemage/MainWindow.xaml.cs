@@ -2,7 +2,6 @@
 using LowLevelHooking;
 using Microsoft.Win32;
 using System;
-using Microsoft.Win32;
 using System.Collections.Generic;
 using System.Diagnostics;
 using System.Threading;
@@ -39,7 +38,6 @@ namespace Gadgetlemage
         /// </summary>
         private Thread RefreshThread;
         private CancellationTokenSource RefreshCancellationSource;
-        private GameVersion gameVersion;
 
         /// <summary>
         /// Constructor
@@ -195,8 +193,6 @@ namespace Gadgetlemage
             comboWeapons.SelectionChanged += ComboWeapons_SelectionChanged;
             btnCreate.IsEnabled = false;
 
-            tbxGameVersion.Text = Model.Version.ToString();
-
             /**
              * Events
              */
@@ -234,7 +230,6 @@ namespace Gadgetlemage
             Dispatcher.Invoke(new Action(() =>
             {
                 btnCreate.IsEnabled = Model.Hooked;
-                tbxGameVersion.Text = Model.Version.ToString();
             }));
         }
 
