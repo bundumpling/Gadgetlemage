@@ -247,7 +247,13 @@ namespace Gadgetlemage
 
                 if (sound)
                 {
-                    playSound(soundPath);
+                    if (soundPath.Length > 0)
+                    {
+                        playSound(soundPath);
+                    } else
+                    {
+                        playBeep();
+                    }
                 }
             }));
         }
@@ -336,16 +342,21 @@ namespace Gadgetlemage
             player.Play();
         }
 
+        private void playBeep()
+        {
+            Console.Beep();
+        }
+
         private void BtnTestSound_Click(object sender, RoutedEventArgs e)
         {
             string path = (string)Properties.Settings.Default["CustomSoundPath"];
             if (path.Length == 0)
             {
-                Console.Beep();
+                playBeep();
             }
             else
             {
-                playSound((string)Properties.Settings.Default["CustomSoundPath"]);
+                playSound(path);
             }
         }
 
