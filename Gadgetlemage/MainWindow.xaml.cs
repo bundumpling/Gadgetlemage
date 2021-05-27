@@ -1,4 +1,7 @@
-﻿using System;
+﻿using Gadgetlemage.DarkSouls;
+using LowLevelHooking;
+using Microsoft.Win32;
+using System;
 using Microsoft.Win32;
 using System.Collections.Generic;
 using System.Diagnostics;
@@ -6,8 +9,6 @@ using System.Threading;
 using System.Windows;
 using System.Windows.Controls;
 using System.Windows.Navigation;
-using Gadgetlemage.DarkSouls;
-using LowLevelHooking;
 
 namespace Gadgetlemage
 {
@@ -226,7 +227,9 @@ namespace Gadgetlemage
         /// </summary>
         /// <param name="sender"></param>
         /// <param name="e"></param>
+#pragma warning disable CS0246 // The type or namespace name 'PropertyHook' could not be found (are you missing a using directive or an assembly reference?)
         private void Hook_OnHookedUnHook(object sender, PropertyHook.PHEventArgs e)
+#pragma warning restore CS0246 // The type or namespace name 'PropertyHook' could not be found (are you missing a using directive or an assembly reference?)
         {
             Dispatcher.Invoke(new Action(() =>
             {
