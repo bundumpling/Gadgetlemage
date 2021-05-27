@@ -38,6 +38,7 @@ namespace Gadgetlemage
         /// </summary>
         private Thread RefreshThread;
         private CancellationTokenSource RefreshCancellationSource;
+        private GameVersion gameVersion;
 
         /// <summary>
         /// Constructor
@@ -51,6 +52,7 @@ namespace Gadgetlemage
 
             this.Loaded += MainWindow_Loaded;
             this.Closed += MainWindow_Closed;
+
         }
 
         /// <summary>
@@ -192,6 +194,8 @@ namespace Gadgetlemage
             comboWeapons.SelectionChanged += ComboWeapons_SelectionChanged;
             btnCreate.IsEnabled = false;
 
+            tbxGameVersion.Text = Model.Version.ToString();
+
             /**
              * Events
              */
@@ -227,6 +231,7 @@ namespace Gadgetlemage
             Dispatcher.Invoke(new Action(() =>
             {
                 btnCreate.IsEnabled = Model.Hooked;
+                tbxGameVersion.Text = Model.Version.ToString();
             }));
         }
 

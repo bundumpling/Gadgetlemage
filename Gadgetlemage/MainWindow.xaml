@@ -55,7 +55,7 @@
                 <Button x:Name="btnTestSound" Content=" ▶" HorizontalAlignment="Right" Margin="0,260,10,0" VerticalAlignment="Top" Width="22" Height="22" FontFamily="Roboto" Grid.Row="1" Click="BtnTestSound_Click" />
             </Grid>
         </GroupBox>
-        <TextBlock x:Name="AboutLink" Margin="0,471,10,-103" HorizontalAlignment="Right" VerticalAlignment="Top">
+        <TextBlock x:Name="tbxGameVersion" Margin="0,471,10,-103" HorizontalAlignment="Right" VerticalAlignment="Top">
             <Hyperlink NavigateUri="https://github.com/CapitaineToinon/Gadgetlemage" RequestNavigate="Hyperlink_RequestNavigate">
                 About
             </Hyperlink>
